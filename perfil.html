@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projeto de Tecnologias de Aplicações Web</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Tecnologias de Aplicações Web</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html">A minha conta</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div id="form">
+<p>Nome: <span id="p-nome"></span></p>
+<p>Email: <span id="p-email"></span></p>
+<p>Telemóvel: <span id="p-telemovel"></span></p>
+<p>NIF: <span id="p-nif"></span></p>
+<p>Morada: <span id="p-morada"></span></p>
+<p>Username: <span id="p-username"></span></p>
+  <img src="foto_perfil.jpg" alt="Foto de Perfil" width="200" height="200">
+
+    <button type="button" id="btn-logout">Sair da Conta (logout)</button>
+</div>
+    <footer>
+      <p>
+        © C-ACADEMY 2025 Projeto Módulo de Tecnologias de Aplicações Web.
+        Desenvolvido por Grupo 02 [Rita Bastos, Paulo Patrão, Leonardo Freitas,
+        João Galriça]
+      </p>
+    </footer>
+    <script>
+  if (!localStorage.getItem('sessao')) {
+    window.location.href = 'login.html';
+  }
+
+  const dados = JSON.parse(localStorage.getItem('utilizador'));
+  if (dados) {
+    document.getElementById('p-nome').textContent      = dados.nome;
+    document.getElementById('p-email').textContent     = dados.email;
+    document.getElementById('p-telemovel').textContent = dados.telemovel;
+    document.getElementById('p-nif').textContent       = dados.nif;
+    document.getElementById('p-morada').textContent    = dados.morada;
+    document.getElementById('p-username').textContent  = dados.username;
+  }
+  const foto = localStorage.getItem('fotoPerfil');
+  if (foto) {
+    document.querySelector('img').src = foto;
+  }
+
+   document.querySelector('#btn-logout').addEventListener('click', () => {
+    localStorage.removeItem('sessao');
+    window.location.href = 'login.html';
+  });
+</script>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #000;
+  padding: 1.5em 0;
+  text-align: center;
+}
+
+main {
+  padding: 1.5em;
+}
+
+section {
+  background-color: #fff;
+  padding: 1em;
+  border: #ccc solid 1px;
+  border-radius: 10px;
+}
+
+footer {
+  background-color: #333;
+  color: #bbb;
+  text-align: center;
+  padding: 1em;
+}
+
+h1 {
+  color: rgb(90, 195, 178);
+  font-size: 2.5rem;
+  font-align: center;
+  margin-bottom: 0.5em;
+}
+
+h2,
+h3 {
+  color: rgb(90, 195, 178);
+  margin-bottom: 0.625em;
+}
+nav ul {
+  list-style: none;
+  text-align: center;
+}
+nav ul li {
+  display: inline-block;
+  margin: 0 0.8em;
+}
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+nav a:hover {
+  color: rgb(90, 195, 178);
+  text-decoration: underline;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+table,
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 0.5em;
+  text-align: left;
+  font-size: 0.9rem;
+}
+table img {
+  width: 3.5rem;
+  margin: auto;
+}
+
+@media (min-width: 768px) {
+  main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5em;
+    grid-template-areas:
+      "conteudo2 video2"
+      "tabela2 tabela2";
+  }
+}
+
+#conteudo {
+  grid-area: conteudo2;
+}
+#video {
+  grid-area: video2;
+}
+#tabela {
+  grid-area: tabela2;
+}
+
+form {
+  padding: 0px;
+}
+
+#form {
+  max-width: 400px;
+  margin: 3em auto;
+  background-color: #fff;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 100%;
+  padding: 0.6em 0.8em;
+  margin-top: 0.3em;
+  margin-bottom: 1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.7em;
+  margin-top: 0.5em;
+  background-color: rgb(90, 195, 178);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(70, 165, 150);
+}
+form button {
+  margin-top: 0;
+}
+
+#form > button {
+  margin-top: 0.8em;
+  background-color: rgb(70, 165, 150);
+}
+input[type="button"] {
+  width: auto;
+  padding: 0.4em 0.8em;
+  background-color: rgb(90, 195, 178);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  margin-bottom: 0.5em;
+}
+
+label {
+  margin-bottom: 0.1em;
+  display: block;
+}
+
+br {
+  display: none;
+}

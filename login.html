@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projeto de Tecnologias de Aplicações Web</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Tecnologias de Aplicações Web</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html">A minha conta</a></li>
+        </ul>
+      </nav>
+    </header>
+<div id="form">
+  <h2>Login</h2>
+  <form name="login">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+
+      <button type="submit">Login</button>
+      
+</form>
+    <button type="button" onclick="window.location.href='registo.html'">Registar</button>
+</div>
+
+    <footer>
+      <p>
+        © C-ACADEMY 2025 Projeto Módulo de Tecnologias de Aplicações Web.
+        Desenvolvido por Grupo 02 [Rita Bastos, Paulo Patrão, Leonardo Freitas,
+        João Galriça]
+      </p>
+    </footer>
+    <script>
+  document.forms['login'].addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const username = this.username.value.trim();
+    const password = this.password.value;
+
+    const dados = JSON.parse(localStorage.getItem('utilizador'));
+
+    if (!dados) {
+      alert('Nenhum utilizador registado. Faça o registo primeiro.'); return;
+    }
+    if (dados.username !== username || dados.password !== password) {
+      alert('Username ou password incorretos.'); return;
+    }
+
+    localStorage.setItem('sessao', 'ativa');
+    window.location.href = 'perfil.html';
+  });
+</script>
+  </body>
+</html>

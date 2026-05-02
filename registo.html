@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projeto de Tecnologias de Aplicações Web</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Tecnologias de Aplicações Web</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html">A minha conta</a></li>
+        </ul>
+      </nav>
+    </header>
+<div id="form">
+ <h2>Registo de Novo Utilizador</h2> 
+<form name="registo">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required /><br>
+
+      <label for="foto">Foto de Perfil:</label>
+      <input type="file" name="foto" id="foto" accept="image/*" />
+      <input type="button" value="Upload Foto" onclick="uploadFoto()" />
+      <br>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <br>
+      <label for="telemovel">Telemóvel:</label>
+      <input type="text" id="telemovel" name="telemovel" required />
+      <br>
+      <label for="nif">NIF (9 dígitos):</label>
+      <input type="text" id="nif" name="nif" required />
+      <label for="morada">Morada:</label>
+      <input type="text" id="morada" name="morada" required />
+      <br>
+      <button type="submit">Registar</button>
+    
+</form>
+    <button type="button" onclick="window.location.href='login.html'">Mudar para Login</button>
+</div><br>
+
+    <footer>
+      <p>
+        © C-ACADEMY 2025 Projeto Módulo de Tecnologias de Aplicações Web.
+        Desenvolvido por Grupo 02 [Rita Bastos, Paulo Patrão, Leonardo Freitas,
+        João Galriça]
+      </p>
+    </footer>
+    <script>
+  function uploadFoto() {
+  const ficheiro = document.getElementById('foto').files[0];
+  if (!ficheiro) {
+    alert('Seleciona uma foto primeiro.'); return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    localStorage.setItem('fotoPerfil', e.target.result);
+    alert('Foto carregada com sucesso!');
+  };
+  reader.readAsDataURL(ficheiro);
+}
+  document.forms['registo'].addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const username  = this.username.value.trim();
+    const password  = this.password.value;
+    const nome      = this.nome.value.trim();
+    const email     = this.email.value.trim();
+    const telemovel = this.telemovel.value.trim();
+    const nif       = this.nif.value.trim();
+    const morada    = this.morada.value.trim();
+
+    // Validações
+    if (username.length < 3) {
+      alert('Username deve ter pelo menos 3 caracteres.'); return;
+    }
+    if (password.length < 6) {
+      alert('Password deve ter pelo menos 6 caracteres.'); return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Email inválido.'); return;
+    }
+    if (!/^9\d{8}$/.test(telemovel)) {
+      alert('Telemóvel inválido (9 dígitos, começa por 9).'); return;
+    }
+    if (!/^\d{9}$/.test(nif)) {
+      alert('NIF inválido (9 dígitos).'); return;
+    }
+
+    // Guarda os dados
+    const utilizador = { username, password, nome, email, telemovel, nif, morada };
+    localStorage.setItem('utilizador', JSON.stringify(utilizador));
+
+    alert('Registo efetuado com sucesso!');
+    window.location.href = 'login.html';
+  });
+</script>
+  </body>
+</html>

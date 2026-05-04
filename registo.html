@@ -97,8 +97,19 @@
     }
 
     // Guarda os dados
-    const utilizador = { username, password, nome, email, telemovel, nif, morada };
-    localStorage.setItem('utilizador', JSON.stringify(utilizador));
+    // DEPOIS
+const utilizador = { username, password, nome, email, telemovel, nif, morada };
+
+// Carrega a lista existente ou cria uma nova
+const lista = JSON.parse(localStorage.getItem('utilizadores')) || [];
+
+// Verifica se o username já existe
+if (lista.find(u => u.username === username)) {
+  alert('Este username já está registado.'); return;
+}
+
+lista.push(utilizador);
+localStorage.setItem('utilizadores', JSON.stringify(lista));
 
     alert('Registo efetuado com sucesso!');
     window.location.href = 'login.html';

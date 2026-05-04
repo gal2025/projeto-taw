@@ -40,23 +40,32 @@
       </p>
     </footer>
     <script>
-  document.forms['login'].addEventListener('submit', function(e) {
-  e.preventDefault();
 
-  const username = this.username.value.trim();
-  const password = this.password.value;
-
-  const lista = JSON.parse(localStorage.getItem('utilizadores')) || [];
-  const dados = lista.find(u => u.username === username && u.password === password);
-
-  if (!dados) {
-    alert('Username ou password incorretos.'); return;
+    if (localStorage.getItem('sessao') === "ativa") {
+    window.location.href = 'perfil.html';
   }
 
-  localStorage.setItem('sessao', 'ativa');
-  localStorage.setItem('utilizador', JSON.stringify(dados));
-  window.location.href = 'perfil.html';
-});
+  document.forms['login'].addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const username = this.username.value.trim();
+    const password = this.password.value;
+    
+    const lista = JSON.parse(localStorage.getItem('utilizadores')) || [];
+    const dados = lista.find(u => u.username === username && u.password === password);
+
+   
+    if (dados.username !== username || dados.password !== password) {
+      alert('Username ou password incorretos.'); return;
+    }
+
+    localStorage.setItem('sessao', 'ativa');
+    localStorage.setItem('utilizador', JSON.stringify(dados));
+    window.location.href = 'perfil.html';
+ // }
+  });
+
+  // v3
 </script>
   </body>
 </html>

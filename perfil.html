@@ -48,16 +48,19 @@
     document.getElementById('p-nif').textContent       = dados.nif;
     document.getElementById('p-morada').textContent    = dados.morada;
     document.getElementById('p-username').textContent  = dados.username;
-  }
-  const foto = localStorage.getItem('fotoPerfil');
-  if (foto) {
+  
+  const foto = dados.foto;
+   if (foto) {
     document.querySelector('img').src = foto;
   }
+}
 
    document.querySelector('#btn-logout').addEventListener('click', () => {
     localStorage.removeItem('sessao');
+    localStorage.removeItem('utilizador');
     window.location.href = 'login.html';
   });
+
 </script>
   </body>
 </html>

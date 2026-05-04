@@ -97,23 +97,26 @@
     }
 
     // Guarda os dados
-    // DEPOIS
-const utilizador = { username, password, nome, email, telemovel, nif, morada };
+    const utilizador = { username, password, nome, email, telemovel, nif, morada, foto: localStorage.getItem('fotoPerfil') || '' };
+    localStorage.setItem('utilizador', JSON.stringify(utilizador));
 
-// Carrega a lista existente ou cria uma nova
-const lista = JSON.parse(localStorage.getItem('utilizadores')) || [];
 
-// Verifica se o username já existe
-if (lista.find(u => u.username === username)) {
-  alert('Este username já está registado.'); return;
-}
+    const lista= JSON.parse(localStorage.getItem('utilizadores')) || [];
 
-lista.push(utilizador);
-localStorage.setItem('utilizadores', JSON.stringify(lista));
+    if (lista.find(u => u.username === username)) {
+      alert('Utilizador já existe. Escolha outro username.'); 
+    return;
+    }
+    else
+    { 
+    lista.push(utilizador);
+    localStorage.setItem('utilizadores', JSON.stringify(lista));
 
     alert('Registo efetuado com sucesso!');
     window.location.href = 'login.html';
-  });
+    
+    }
+});
 </script>
   </body>
 </html>

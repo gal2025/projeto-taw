@@ -36,10 +36,12 @@
       </p>
     </footer>
     <script>
+      // Verificar se o utilizador está autenticado
   if (!localStorage.getItem('sessao')) {
     window.location.href = 'login.html';
   }
 
+    // Carregar os dados do utilizador e preencher o perfil
   const dados = JSON.parse(localStorage.getItem('utilizador'));
   if (dados) {
     document.getElementById('p-nome').textContent      = dados.nome;
@@ -54,7 +56,7 @@
     document.querySelector('img').src = foto;
   }
 }
-
+    // Logout e limpeza da sessão
    document.querySelector('#btn-logout').addEventListener('click', () => {
     localStorage.removeItem('sessao');
     localStorage.removeItem('utilizador');

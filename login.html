@@ -41,31 +41,35 @@
     </footer>
     <script>
 
+        // Verificar se a sessão já está ativa e redirecionar para o perfil
     if (localStorage.getItem('sessao') === "ativa") {
     window.location.href = 'perfil.html';
   }
 
+        //Prevenir o comportamento padrão do formulário
   document.forms['login'].addEventListener('submit', function(e) {
     e.preventDefault();
 
+    // Obter os valores do formulário
     const username = this.username.value.trim();
     const password = this.password.value;
     
+    // Aceder à lista de utilizadores e verificar as credenciais
     const lista = JSON.parse(localStorage.getItem('utilizadores')) || [];
     const dados = lista.find(u => u.username === username && u.password === password);
 
-   
+  
     if (dados.username !== username || dados.password !== password) {
       alert('Username ou password incorretos.'); return;
     }
 
+    // Se as credenciais estiverem corretas, iniciar a sessão guardando o estado e redirecionar para o perfil
     localStorage.setItem('sessao', 'ativa');
     localStorage.setItem('utilizador', JSON.stringify(dados));
     window.location.href = 'perfil.html';
  // }
   });
-
-  // v3
+  
 </script>
   </body>
 </html>

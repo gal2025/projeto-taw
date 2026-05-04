@@ -56,6 +56,8 @@
       </p>
     </footer>
     <script>
+
+      // Carregar a função de upload da foto
   function uploadFoto() {
   const ficheiro = document.getElementById('foto').files[0];
   if (!ficheiro) {
@@ -68,6 +70,8 @@
   };
   reader.readAsDataURL(ficheiro);
 }
+
+    // Validação e armazenamento dos dados do registo
   document.forms['registo'].addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -100,13 +104,14 @@
     const utilizador = { username, password, nome, email, telemovel, nif, morada, foto: localStorage.getItem('fotoPerfil') || '' };
     localStorage.setItem('utilizador', JSON.stringify(utilizador));
 
-
+      // Verificar se o username já existe
     const lista= JSON.parse(localStorage.getItem('utilizadores')) || [];
 
     if (lista.find(u => u.username === username)) {
       alert('Utilizador já existe. Escolha outro username.'); 
     return;
     }
+      //Adicionar o novo utilizador à lista e guardar no localStorage
     else
     { 
     lista.push(utilizador);

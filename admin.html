@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projeto de Tecnologias de Aplicações Web</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Tecnologias de Aplicações Web</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="admin.html">Painel de Administração</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="form" style="max-width: 800px;">
+      <h2>Lista de Utilizadores Registados</h2>
+      <table id="tabela-utilizadores">
+        <tr>
+          <th>Foto</th>
+          <th>Username</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>NIF</th>
+          <th>Ação</th>
+        </tr>
+      </table>
+      <button type="button" id="btn-logout">Sair da Conta (logout)</button>
+    </div>
+
+    <footer>
+      <p>
+        © C-ACADEMY 2025 Projeto Módulo de Tecnologias de Aplicações Web.
+        Desenvolvido por Grupo 02 [Rita Bastos, Paulo Patrão, Leonardo Freitas,
+        João Galriça]
+      </p>
+    </footer>
+
+    <script>
+      if (!localStorage.getItem('sessao')) {
+        window.location.href = 'login.html';
+      }
+
+      function carregarUtilizadores() {
+        const lista = JSON.parse(localStorage.getItem('utilizadores')) || [];
+        const tabela = document.getElementById('tabela-utilizadores');
+
+        while (tabela.rows.length > 1) {
+          tabela.deleteRow(1);
+        }
+
+        lista.forEach(function(u, index) {
+          const foto = localStorage.getItem('fotoPerfil') || '';
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${foto ? `<img src="${foto}" width="50" height="50" alt="foto" style="border-radius:50%">` : 'Sem foto'}</td>
+            <td>${u.username}</td>
+            <td>${u.nome}</td>
+            <td>${u.email}</td>
+            <td>${u.nif}</td>
+            <td><button type="button" onclick="remover(${index})" style="width:auto; background-color:#e74c3c; padding: 0.3em 0.8em;">Remover</button></td>
+          `;
+          tabela.appendChild(tr);
+        });
+      }
+
+      function remover(index) {
+        if (!confirm('Tens a certeza que queres remover este utilizador?')) return;
+        const lista = JSON.parse(localStorage.getItem('utilizadores')) || [];
+        lista.splice(index, 1);
+        localStorage.setItem('utilizadores', JSON.stringify(lista));
+        carregarUtilizadores();
+      }
+
+      document.getElementById('btn-logout').addEventListener('click', () => {
+        localStorage.removeItem('sessao');
+        window.location.href = 'login.html';
+      });
+
+      carregarUtilizadores();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projeto de Tecnologias de Aplicações Web</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Tecnologias de Aplicações Web</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html">A minha conta</a></li>
+        </ul>
+      </nav>
+    </header>
+<div id="form">
+  <h2>Login</h2>
+  <form name="login">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+
+      <button type="submit">Login</button>
+      
+</form>
+    <button type="button" onclick="window.location.href='registo.html'">Registar</button>
+</div>
+
+    <footer>
+      <p>
+        © C-ACADEMY 2025 Projeto Módulo de Tecnologias de Aplicações Web.
+        Desenvolvido por Grupo 02 [Rita Bastos, Paulo Patrão, Leonardo Freitas,
+        João Galriça]
+      </p>
+    </footer>
+    <script>
+
+        // Verificar se a sessão já está ativa e redirecionar para o perfil
+    if (localStorage.getItem('sessao') === "ativa") {
+    window.location.href = 'perfil.html';
+  }
+
+        //Prevenir o comportamento padrão do formulário
+  document.forms['login'].addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Obter os valores do formulário
+    const username = this.username.value.trim();
+    const password = this.password.value;
+    
+    // Aceder à lista de utilizadores e verificar as credenciais
+    const lista = JSON.parse(localStorage.getItem('utilizadores')) || [];
+    const dados = lista.find(u => u.username === username && u.password === password);
+
+  
+    if (dados.username !== username || dados.password !== password) {
+      alert('Username ou password incorretos.'); return;
+    }
+
+    // Se as credenciais estiverem corretas, iniciar a sessão guardando o estado e redirecionar para o perfil
+    localStorage.setItem('sessao', 'ativa');
+    localStorage.setItem('utilizador', JSON.stringify(dados));
+    window.location.href = 'perfil.html';
+ // }
+  });
+  
+</script>
+  </body>
+</html>

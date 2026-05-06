@@ -59,7 +59,7 @@
     const dados = lista.find(u => u.username === username && u.password === password);
 
   
-    if (dados.username !== username || dados.password !== password) {
+    if (dados== null || dados.username !== username || dados.password !== password) {
       alert('Username ou password incorretos.'); return;
     }
 

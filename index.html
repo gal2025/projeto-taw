@@ -14,68 +14,87 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="login.html">A minha conta</a></li>
+           <li><a onclick="AbrirAdmin()">Admin</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
-      <section id="conteudo">
-        <h2>25 de Abril Sempre!</h2>
+      <div id="divLogin">
+        <h2>Login</h2>
+        <form name="login">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required />
 
-        <p>
-          A Revolução de 25 de Abril de 1974, também conhecida como Revolução
-          dos Cravos, Revolução de Abril ou apenas por 25 de Abril, refere-se a
-          um evento da história de Portugal resultante do movimento político e
-          social, ocorrido a 25 de abril de 1974, que depôs o regime ditatorial
-          do Estado Novo, vigente desde 1933, e que iniciou um processo que
-          viria a terminar com a implantação de um regime democrático e com a
-          entrada em vigor da nova Constituição a 25 de abril de 1976, marcada
-          por forte orientação socialista.
-        </p>
-      </section>
-      <section id="video">
-        <video controls>
-          <source
-            src="https://www.youtube.com/watch?v=it1rTvBcfRg.mp"
-            type="video/mp4"
-          />
-        </video>
-      </section>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
 
-      <section id="tabela">
-        <h3>Tabela de Recursos do Projeto</h3>
-        <table>
+          <button type="submit">Login</button>
+        </form>
+        <button type="button" onclick="AbrirRegistro()">Registar</button>
+      </div>
+
+      <div id="divRegistro" style="visibility: hidden">
+        <h2>Registo de Novo Utilizador</h2>
+        <form name="registo">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required />
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required /><br />
+
+          <label for="foto">Foto de Perfil:</label>
+          <input type="file" name="foto" id="foto" accept="image/*" />
+          <input type="button" value="Upload Foto" onclick="uploadFoto()" />
+          <br />
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required />
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+          <br />
+          <label for="telemovel">Telemóvel:</label>
+          <input type="text" id="telemovel" name="telemovel" required />
+          <br />
+          <label for="nif">NIF (9 dígitos):</label>
+          <input type="text" id="nif" name="nif" required />
+          <label for="morada">Morada:</label>
+          <input type="text" id="morada" name="morada" required />
+          <br />
+          <button type="submit">Registar</button>
+        </form>
+        <button type="button" onclick="AbrirLogin()">Mudar para Login</button>
+      </div>
+
+      <div id="divPerfil" style="visibility: hidden">
+        <p>Nome: <span id="p-nome"></span></p>
+        <p>Email: <span id="p-email"></span></p>
+        <p>Telemóvel: <span id="p-telemovel"></span></p>
+        <p>NIF: <span id="p-nif"></span></p>
+        <p>Morada: <span id="p-morada"></span></p>
+        <p>Username: <span id="p-username"></span></p>
+        <img
+          src="foto_perfil.jpg"
+          alt="Foto de Perfil"
+          width="200"
+          height="200"
+        />
+
+        <button type="button" id="btn-logout">Sair da Conta (logout)</button>
+      </div>
+
+      <div id="divAdmin" style="visibility: hidden">
+        <h2>Lista de Utilizadores Registados</h2>
+        <table id="tabela-utilizadores">
           <tr>
-            <th></th>
-            <th>Recurso</th>
-            <th>Tipo de Ficheiro</th>
-            <th>Utilização</th>
-          </tr>
-
-          <tr>
-            <td><img src="img/logo_html.png" height="50px" /></td>
-            <td>Hypertext Markup Language</td>
-            <td>.html</td>
-            <td>Permite descrever conteúdo de páginas web</td>
-          </tr>
-
-          <tr>
-            <td><img src="img/logo_css.png" height="50px" /></td>
-            <td>Cascading Style Sheets</td>
-            <td>.css</td>
-            <td>
-              Responsável pela apresentação e formatação dos elementos HTML
-            </td>
-          </tr>
-
-          <tr>
-            <td><img src="img/logo_js.png" height="50px" /></td>
-            <td>Javascript</td>
-            <td>.js</td>
-            <td>Permite adicionar comportamento no cliente (browser)</td>
+            <th>Foto</th>
+            <th>Username</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>NIF</th>
+            <th>Ação</th>
           </tr>
         </table>
-      </section>
+        <button type="button" id="btn-logout">Sair da Conta (logout)</button>
+      </div>
     </main>
     <footer>
       <p>
@@ -86,3 +105,210 @@
     </footer>
   </body>
 </html>
+
+<script>
+  function EsconderTodos() {
+    document.getElementById("divLogin").style.visibility = "hidden";
+    document.getElementById("divRegistro").style.visibility = "hidden";
+    document.getElementById("divPerfil").style.visibility = "hidden";
+    document.getElementById("divAdmin").style.visibility = "hidden";
+  }
+  function AbrirRegistro() {
+   EsconderTodos(); 
+    document.getElementById("divRegistro").style.visibility = "visible";
+  }
+  function AbrirLogin() {
+   EsconderTodos(); 
+    document.getElementById("divLogin").style.visibility = "visible";
+  }
+  function AbrirPerfil() {
+    EsconderTodos(); 
+    document.getElementById("divPerfil").style.visibility = "visible";
+  }
+function AbrirAdmin() {
+    EsconderTodos(); 
+    document.getElementById("divAdmin").style.visibility = "visible";
+  }
+  // Verificar se a sessão já está ativa e redirecionar para o perfil
+  if (localStorage.getItem("sessao") === "ativa") {
+    AbrirPerfil();
+  }
+
+  //Prevenir o comportamento padrão do formulário
+  document.forms["login"].addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Obter os valores do formulário
+    const username = this.username.value.trim();
+    const password = this.password.value;
+
+    // Aceder à lista de utilizadores e verificar as credenciais
+    const lista = JSON.parse(localStorage.getItem("utilizadores")) || [];
+    const dados = lista.find(
+      (u) => u.username === username && u.password === password,
+    );
+
+    if (
+      dados == null ||
+      dados.username !== username ||
+      dados.password !== password
+    ) {
+      alert("Username ou password incorretos.");
+      return;
+    }
+
+    // Se as credenciais estiverem corretas, iniciar a sessão guardando o estado e redirecionar para o perfil
+    localStorage.setItem("sessao", "ativa");
+    localStorage.setItem("utilizador", JSON.stringify(dados));
+   AbrirPerfil();
+    // }
+  });
+
+  // Carregar a função de upload da foto
+  function uploadFoto() {
+    const ficheiro = document.getElementById("foto").files[0];
+    if (!ficheiro) {
+      alert("Seleciona uma foto primeiro.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      localStorage.setItem("fotoPerfil", e.target.result);
+      alert("Foto carregada com sucesso!");
+    };
+    reader.readAsDataURL(ficheiro);
+  }
+
+  // Validação e armazenamento dos dados do registo
+  document.forms["registo"].addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const username = this.username.value.trim();
+    const password = this.password.value;
+    const nome = this.nome.value.trim();
+    const email = this.email.value.trim();
+    const telemovel = this.telemovel.value.trim();
+    const nif = this.nif.value.trim();
+    const morada = this.morada.value.trim();
+
+    // Validações
+    if (username.length < 3) {
+      alert("Username deve ter pelo menos 3 caracteres.");
+      return;
+    }
+    if (password.length < 6) {
+      alert("Password deve ter pelo menos 6 caracteres.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert("Email inválido.");
+      return;
+    }
+    if (!/^9\d{8}$/.test(telemovel)) {
+      alert("Telemóvel inválido (9 dígitos, começa por 9).");
+      return;
+    }
+    if (!/^\d{9}$/.test(nif)) {
+      alert("NIF inválido (9 dígitos).");
+      return;
+    }
+
+    // Guarda os dados
+    const utilizador = {
+      username,
+      password,
+      nome,
+      email,
+      telemovel,
+      nif,
+      morada,
+      foto: localStorage.getItem("fotoPerfil") || "",
+    };
+    localStorage.setItem("utilizador", JSON.stringify(utilizador));
+
+    // Verificar se o username já existe
+    const lista = JSON.parse(localStorage.getItem("utilizadores")) || [];
+
+    if (lista.find((u) => u.username === username)) {
+      alert("Utilizador já existe. Escolha outro username.");
+      return;
+    }
+    //Adicionar o novo utilizador à lista e guardar no localStorage
+    else {
+      lista.push(utilizador);
+      localStorage.setItem("utilizadores", JSON.stringify(lista));
+
+      alert("Registo efetuado com sucesso!");
+      AbrirLogin();
+    }
+  });
+
+  // Verificar se o utilizador está autenticado
+  if (!localStorage.getItem("sessao")) {
+    AbrirLogin();
+  }
+
+  // Carregar os dados do utilizador e preencher o perfil
+  const dados = JSON.parse(localStorage.getItem("utilizador"));
+  if (dados) {
+    document.getElementById("p-nome").textContent = dados.nome;
+    document.getElementById("p-email").textContent = dados.email;
+    document.getElementById("p-telemovel").textContent = dados.telemovel;
+    document.getElementById("p-nif").textContent = dados.nif;
+    document.getElementById("p-morada").textContent = dados.morada;
+    document.getElementById("p-username").textContent = dados.username;
+
+    const foto = dados.foto;
+    if (foto) {
+      document.querySelector("img").src = foto;
+    }
+  }
+  // Logout e limpeza da sessão
+  document.querySelector("#btn-logout").addEventListener("click", () => {
+    localStorage.removeItem("sessao");
+    localStorage.removeItem("utilizador");
+    AbrirLogin();
+  });
+
+  if (!localStorage.getItem("sessao")) {
+      AbrirLogin();
+  }
+
+  function carregarUtilizadores() {
+    const lista = JSON.parse(localStorage.getItem("utilizadores")) || [];
+    const tabela = document.getElementById("tabela-utilizadores");
+
+    while (tabela.rows.length > 1) {
+      tabela.deleteRow(1);
+    }
+
+    lista.forEach(function (u, index) {
+      const foto = localStorage.getItem("fotoPerfil") || "";
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+            <td>${foto ? `<img src="${foto}" width="50" height="50" alt="foto" style="border-radius:50%">` : "Sem foto"}</td>
+            <td>${u.username}</td>
+            <td>${u.nome}</td>
+            <td>${u.email}</td>
+            <td>${u.nif}</td>
+            <td><button type="button" onclick="remover(${index})" style="width:auto; background-color:#e74c3c; padding: 0.3em 0.8em;">Remover</button></td>
+          `;
+      tabela.appendChild(tr);
+    });
+  }
+
+  function remover(index) {
+    if (!confirm("Tens a certeza que queres remover este utilizador?")) return;
+    const lista = JSON.parse(localStorage.getItem("utilizadores")) || [];
+    lista.splice(index, 1);
+    localStorage.setItem("utilizadores", JSON.stringify(lista));
+    carregarUtilizadores();
+  }
+
+  document.getElementById("btn-logout").addEventListener("click", () => {
+    localStorage.removeItem("sessao");
+    AbrirLogin();
+  });
+
+  carregarUtilizadores();
+</script>
